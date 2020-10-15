@@ -1,2 +1,2 @@
 # LCA-java
-LCA java implementation for Software Engineering 
+Lowest common ancestor java implementation for Software Engineering 
