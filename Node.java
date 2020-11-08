@@ -1,32 +1,28 @@
+import java.util.ArrayList;
+
 public class Node {
+
+	private char key;
+	private ArrayList<Node> parents;
+
+	Node(char key, ArrayList<Node> passedParents) {
+		this.key = key;
+		this.parents = new ArrayList<Node>(passedParents);
+	}
+
+	public void getParentKeys() {
+		System.out.print("Node " + this.key + "'s parents: ");
+		for (int i = 0; i < parents.size(); i++) {
+			System.out.print(this.parents.get(i).key + ", ");
+		}
+		System.out.println();
+	}
 	
-    private char key;
-    private Node parent;
-    private int tier;
-
-    Node(char key, Node parent) {
-        this.key = key;
-        this.parent = parent;
-        if (this.parent!=null) {
-            this.tier = parent.getTier()+1;
-        } else {
-            this.tier = 0;
-        }
-    }
-
-    public char getParentKey() {
-        return parent.key;
-    }
-
-    public Node getParent() {
-        return this.parent;
-    }
-
-    public boolean hasParent() {
-        return (parent==null ? false : true);
-    }
-
-    public int getTier() {
-        return this.tier;
-    }
+	public ArrayList<Node> getParents() {
+		return this.parents;
+	}
+	
+	public char getKey() {
+		return this.key;
+	}
 }
