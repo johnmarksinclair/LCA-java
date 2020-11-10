@@ -2,52 +2,43 @@ import java.util.ArrayList;
 
 public class LCA {
 
-	private static ArrayList<Character> ancestors;
-	private static int hops;
-	private static int tempHops;
-
-//	public static char getLCA(Node one, Node two) {
-//		if (one.getKey() > two.getKey()) {
-//			Node temp = two;
-//			two = one;
-//			one = temp;
-//		}
-//		ArrayList<Character> onesAncestors = getAncestorsKeys(one, true);
-//		ArrayList<Character> twosAncestors = getAncestorsKeys(two, true);
-//		System.out.println(onesAncestors.toString());
-//		System.out.println(twosAncestors.toString());
-//		for (int i = 0; i < twosAncestors.size(); i++) {
-//			for (int j = 0; j < onesAncestors.size(); j++) {
-//				if (twosAncestors.get(i) == onesAncestors.get(j)) {
-//					return twosAncestors.get(i);
-//				}
-//			}
-//		}
-//		return '!';
-//	}
+	private static ArrayList<Node> ancestors;
 
 	public static char getLCA(Node one, Node two) {
-		ArrayList<Character> onesAncestors = getAncestorsKeys(one, true);
-		ArrayList<Character> twosAncestors = getAncestorsKeys(two, true);
-		System.out.println(onesAncestors.toString());
-		System.out.println(twosAncestors.toString());
-		onesAncestors.retainAll(twosAncestors);
-
-		System.out.println(onesAncestors.toString());
-		for (int i = 0; i < onesAncestors.size(); i++) {
-			// for each ancestor find one with greatest distance from root
+		ArrayList<Node> common = getCommonAncestors(one, two);
+		if (common.size() > 1) {
+			Node temp = common.get(0);
+			for (int i = 1; i < common.size(); i++) {
+				if (common.get(i).getDistanceFromRoot() > temp.getDistanceFromRoot()) {
+					temp = common.get(i);
+				}
+			}
+			return temp.getKey();
+		} else if (common.size() == 1) {
+			return common.get(0).getKey();
+		} else {
+			return '!';
 		}
-		return '!';
+
 	}
 
-	public static ArrayList<Character> getAncestorsKeys(Node node, boolean firstPass) {
+	public static ArrayList<Node> getCommonAncestors(Node one, Node two) {
+		ArrayList<Node> onesAncestors = getAncestors(one, true);
+		//printNodeList(onesAncestors);
+		ArrayList<Node> twosAncestors = getAncestors(two, true);
+		//printNodeList(twosAncestors);
+		onesAncestors.retainAll(twosAncestors);
+		//printNodeList(onesAncestors);
+		return onesAncestors;
+	}
+
+	public static ArrayList<Node> getAncestors(Node node, boolean firstPass) {
 		if (firstPass) {
-			ancestors = new ArrayList<Character>();
-			ancestors.add(node.getKey()); // can node be its own ancestor?
+			ancestors = new ArrayList<Node>();
+			ancestors.add(node);
 		}
 		for (int i = 0; i < node.getParents().size(); i++) {
-			// System.out.println(node.getParents().get(i).getKey());
-			char temp = node.getParents().get(i).getKey();
+			Node temp = node.getParents().get(i);
 			boolean flag = false;
 			for (int j = 0; j < ancestors.size(); j++) {
 				if (temp == ancestors.get(j)) {
@@ -56,27 +47,18 @@ public class LCA {
 			}
 			if (flag == false) {
 				ancestors.add(temp);
-				// System.out.println(ancestors.toString());
 			}
-			getAncestorsKeys(node.getParents().get(i), false);
+			getAncestors(node.getParents().get(i), false);
 		}
 		return ancestors;
 	}
 
-	// get lowest amount of hops
-	public static int distanceFromRoot(Node node, boolean firstPass) {
-		if (firstPass) {
-			hops = Integer.MAX_VALUE;
-			tempHops = 0;
+	public static void printNodeList(ArrayList<Node> nodes) {
+		for (int i = 0; i < nodes.size(); i++) {
+			System.out.println(
+					"Node: " + nodes.get(i).getKey() + ", distance from root: " + nodes.get(i).getDistanceFromRoot());
 		}
-			
-		for (int i = 0; i <  node.getParents().size(); i++) {
-			
-		}
-		tempHops += 1;
-		if (tempHops < hops) {
-			hops = tempHops;
-		}
-		return hops;
+		System.out.println();
 	}
+
 }

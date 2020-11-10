@@ -4,14 +4,17 @@ public class Node {
 
 	private char key;
 	private ArrayList<Node> parents;
+	private int distanceFromRoot;
 
 	Node(char key) {
 		this.key = key;
 		this.parents = new ArrayList<Node>();
+		initDistanceFromRoot();
 	}
 
 	public void addParent(Node parent) {
 		this.parents.add(parent);
+		initDistanceFromRoot();
 	}
 
 	public char getKey() {
@@ -30,11 +33,22 @@ public class Node {
 		return parentsKeys;
 	}
 	
-	public boolean hasParent() {
-		if (parents.size() > 0) {
-			return true;
+	public void initDistanceFromRoot() {
+		if (this.parents.size() == 0) {
+			this.distanceFromRoot = 0;
 		} else {
-			return false;
+			int tempDistance = Integer.MAX_VALUE;
+			for (int i = 0; i < parents.size(); i++) {
+				if (this.parents.get(i).getDistanceFromRoot() < tempDistance) {
+					tempDistance = this.parents.get(i).getDistanceFromRoot();
+				}
+			}
+			this.distanceFromRoot = tempDistance + 1;
 		}
+	}
+	
+	public int getDistanceFromRoot() {
+		initDistanceFromRoot();
+		return this.distanceFromRoot;
 	}
 }
