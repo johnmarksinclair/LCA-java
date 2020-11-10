@@ -3,29 +3,23 @@ import java.util.ArrayList;
 public class Node {
 
 	private char key;
-	private Node left, right;
+	private ArrayList<Node> children;
 	
 	Node(char key) {
 		this.key = key;
-		this.right = null;
-		this.left = null;
+		this.children = new ArrayList<Node>();
 	}
 
-	Node(char key, Node left, Node right) {
+	Node(char key, ArrayList<Node> kids) {
 		this.key = key;
-		this.left = left;
-		this.right = right;
+		this.children = kids;
 	}
 	
 	public char getKey() {
 		return this.key;
 	}
 	
-	public Node getLeftChild() {
-		return this.left;
-	}
-	
-	public Node getRightChild() {
-		return this.right;
+	public ArrayList<Node> getChildren() {
+		return this.children;
 	}
 }
