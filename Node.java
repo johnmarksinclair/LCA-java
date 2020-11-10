@@ -29,4 +29,12 @@ public class Node {
 		}
 		return parentsKeys;
 	}
+	
+	public boolean hasParent() {
+		if (parents.size() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
