@@ -1,13 +1,11 @@
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
-
 import org.junit.jupiter.api.Test;
 
-class LCATest {
+class NodeTest {
 
 	@Test
-	void testLCA() {
+	void test() {
 		fail("Not yet implemented");
 	}
 

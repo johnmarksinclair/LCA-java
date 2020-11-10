@@ -3,26 +3,29 @@ import java.util.ArrayList;
 public class Node {
 
 	private char key;
-	private ArrayList<Node> parents;
-
-	Node(char key, ArrayList<Node> passedParents) {
-		this.key = key;
-		this.parents = new ArrayList<Node>(passedParents);
-	}
-
-	public void getParentKeys() {
-		System.out.print("Node " + this.key + "'s parents: ");
-		for (int i = 0; i < parents.size(); i++) {
-			System.out.print(this.parents.get(i).key + ", ");
-		}
-		System.out.println();
-	}
+	private Node left, right;
 	
-	public ArrayList<Node> getParents() {
-		return this.parents;
+	Node(char key) {
+		this.key = key;
+		this.right = null;
+		this.left = null;
+	}
+
+	Node(char key, Node left, Node right) {
+		this.key = key;
+		this.left = left;
+		this.right = right;
 	}
 	
 	public char getKey() {
 		return this.key;
+	}
+	
+	public Node getLeftChild() {
+		return this.left;
+	}
+	
+	public Node getRightChild() {
+		return this.right;
 	}
 }
