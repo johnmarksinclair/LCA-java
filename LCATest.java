@@ -1,3 +1,5 @@
+import static org.junit.Assert.assertEquals;
+
 import org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
@@ -5,7 +7,7 @@ import org.junit.jupiter.api.Test;
 class LCATest {
 
 	@Test
-	void testGetAncestors() {
+	void testGetAncestorsKeys() {
 		Node a = new Node('a');
 		Node b = new Node('b');
 		Node c = new Node('c');
@@ -17,10 +19,7 @@ class LCATest {
 		d.addParent(c);
 		e.addParent(c);
 		e.addParent(d);
-		
-		System.out.println("Parents: " + e.getParentsKeys().toString());
-		//System.out.println("Ancestors: " + LCA.getAncestorsKeys(e).toString());
-		
+		assertEquals("[c, a, d, b]", LCA.getAncestorsKeys(e, true).toString());
 	}
 
 }
