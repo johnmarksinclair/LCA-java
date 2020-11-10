@@ -2,22 +2,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class NodeTest {
+class GraphTest {
 
 	@Test
-	void testConstructor() {
-		Node a = new Node('a');
-		assertTrue(a != null);
-	}
-
-	@Test
-	void testGetKey() {
-		Node a = new Node('a');
-		assertEquals('a', a.getKey());
-	}
-
-	@Test
-	void testGetParentsKeys() {
+	void test() {
 		Node a = new Node('a');
 		Node b = new Node('b');
 		Node c = new Node('c');
@@ -29,7 +17,16 @@ class NodeTest {
 		d.addParent(c);
 		e.addParent(c);
 		e.addParent(d);
-		assertEquals("[b, c]", d.getParentsKeys().toString());
+		Graph graph = new Graph();
+		graph.addNode(a);
+		graph.addNode(b);
+		graph.addNode(c);
+		graph.addNode(d);
+		graph.addNode(e);
+		
+		System.out.println("Parents: " + e.getParentsKeys().toString());
+		
+		System.out.println("Ancestors: " + graph.getAncestorsKeys(e).toString());
 	}
 
 }
