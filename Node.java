@@ -9,12 +9,10 @@ public class Node {
 	Node(char key) {
 		this.key = key;
 		this.parents = new ArrayList<Node>();
-		initDistanceFromRoot();
 	}
 
 	public void addParent(Node parent) {
 		this.parents.add(parent);
-		initDistanceFromRoot();
 	}
 
 	public char getKey() {
@@ -33,7 +31,7 @@ public class Node {
 		return parentsKeys;
 	}
 	
-	public void initDistanceFromRoot() {
+	public void updateDistanceFromRoot() {
 		if (this.parents.size() == 0) {
 			this.distanceFromRoot = 0;
 		} else {
@@ -48,7 +46,7 @@ public class Node {
 	}
 	
 	public int getDistanceFromRoot() {
-		initDistanceFromRoot();
+		updateDistanceFromRoot();
 		return this.distanceFromRoot;
 	}
 }

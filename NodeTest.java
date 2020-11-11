@@ -31,5 +31,20 @@ class NodeTest {
 		e.addParent(d);
 		assertEquals("[b, c]", d.getParentsKeys().toString());
 	}
+	
+	@Test 
+	void testGetDistanceFromRoot() {
+		Node a = new Node('a');
+		Node b = new Node('b');
+		Node c = new Node('c');
+		Node d = new Node('d');
+		b.addParent(a);
+		c.addParent(b);
+		d.addParent(c);
+		assertEquals(1, b.getDistanceFromRoot());
+		assertEquals(3, d.getDistanceFromRoot());
+		d.addParent(b);
+		assertEquals(2, d.getDistanceFromRoot());
+	}
 
 }
